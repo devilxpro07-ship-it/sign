@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>⚡ Butter · EE + CyberSec</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b0f1a;
+            color: #d0d9e8;
+            font-family: 'Courier New', monospace;
+            padding: 1.5rem;
+            transition: background 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+        body.light {
+            background: #f0f4fa;
+            color: #1a1f2e;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        /* ---------- RIBBON ---------- */
+        .github-ribbon {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .github-ribbon a {
+            pointer-events: auto;
+            display: block;
+            width: 200px;
+            padding: 6px 0;
+            background: #ffb000;
+            color: #0b0f1a;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            transform: rotate(45deg) translate(30px, -30px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid #ffb000;
+        }
+        /* ---------- HEADER ---------- */
+        .header {
+            background: #121826;
+            padding: 2rem 2rem 1.5rem;
+            border-radius: 16px 16px 0 0;
+            border-bottom: 3px solid #ffb000;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        body.light .header {
+            background: #e8edf5;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: #fff;
+        }
+        body.light .header h1 {
+            color: #0b0f1a;
+        }
+        .header h1 .accent {
+            color: #ffb000;
+            text-shadow: 0 0 20px #ffb00044;
+        }
+        .header .badge {
+            background: #1e2a3a;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 1px solid #2a3a5e;
+        }
+        body.light .header .badge {
+            background: #d0d9e8;
+            border-color: #aab3c8;
+        }
+        /* ---------- HERO ---------- */
+        .hero {
+            background: #121826;
+            padding: 2.5rem 2rem;
+            border-radius: 0 0 16px 16px;
+            margin-bottom: 2.5rem;
+        }
+        body.light .hero {
+            background: #e8edf5;
+        }
+        .hero .typed {
+            font-size: 1.8rem;
+            color: #00ff41;
+            border-left: 4px solid #00ff41;
+            padding-left: 1.2rem;
+            min-height: 3.2rem;
+        }
+        .hero .sub {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0 1.5rem 0;
+            color: #8899b0;
+        }
+        body.light .hero .sub {
+            color: #3a4a62;
+        }
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .btn {
+            background: transparent;
+            border: 1.5px solid #ffb000;
+            color: #ffb000;
+            padding: 0.6rem 2rem;
+            border-radius: 40px;
+            font-family: inherit;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #ffb000;
+            color: #0b0f1a;
+            box-shadow: 0 0 28px #ffb00044;
+        }
+        .btn-primary {
+            background: #ffb000;
+            color: #0b0f1a;
+            border-color: #ffb000;
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: #ffb000;
+        }
+        /* ---------- THEME TOGGLE ---------- */
+        .theme-toggle {
+            background: #1e2a3a;
+            border: none;
+            color: #ffb000;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        body.light .theme-toggle {
+            background: #d0d9e8;
+        }
+        /* ---------- PROJECTS ---------- */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 400;
+            border-bottom: 2px solid #1e2a3a;
+            padding-bottom: 0.3rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: #fff;
+        }
+        body.light .section-title {
+            color: #0b0f1a;
+            border-bottom-color: #b0bccf;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+        .project-card {
+            background: #121826;
+            padding: 1.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #1e2a3a;
+            transition: 0.2s;
+        }
+        body.light .project-card {
+            background: #e8edf5;
+            border-color: #c8d2e2;
+        }
+        .project-card:hover {
+            border-color: #ffb000;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(255,176,0,0.06);
+        }
+        .project-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+        }
+        body.light .project-card h3 {
+            color: #0b0f1a;
+        }
+        .project-card .tag {
+            display: inline-block;
+            background: #1e2a3a;
+            color: #ffb000;
+            font-size: 0.7rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 30px;
+            margin: 0.3rem 0 0.7rem 0;
+        }
+        body.light .project-card .tag {
+            background: #d0d9e8;
+        }
+        .project-card p {
+            color: #8899b0;
+            font-size: 0.95rem;
+        }
+        body.light .project-card p {
+            color: #3a4a62;
+        }
+        .project-card .repo-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            color: #ffb000;
+            text-decoration: none;
+            border-bottom: 1px dashed #ffb00044;
+        }
+        .project-card .repo-link:hover {
+            border-bottom-color: #ffb000;
+        }
+        /* ---------- CONTACT ---------- */
+        .contact {
+            background: #121826;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        body.light .contact {
+            background: #e8edf5;
+        }
+        .contact .social {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .contact .social a {
+            color: #8899b0;
+            text-decoration: none;
+            border-bottom: 1px dashed #2a3a5e;
+            padding-bottom: 0.2rem;
+            font-size: 1.1rem;
+        }
+        body.light .contact .social a {
+            color: #3a4a62;
+            border-bottom-color: #b0bccf;
+        }
+        .contact .social a:hover {
+            color: #ffb000;
+            border-bottom-color: #ffb000;
+        }
+        /* ---------- FOOTER ---------- */
+        .footer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #3a4a62;
+            border-top: 1px solid #1e2a3a;
+            padding-top: 1.8rem;
+            margin-top: 2rem;
+        }
+        body.light .footer {
+            border-top-color: #c8d2e2;
+        }
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 2rem; }
+            .hero .typed { font-size: 1.2rem; }
+            .github-ribbon { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GITHUB RIBBON (links to your profile) -->
+    <div class="github-ribbon">
+        <a href="https://github.com/YOUR_USERNAME" target="_blank">Fork me on GitHub</a>
+    </div>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>⚡ <span class="accent">Butter</span> · EE+Cyber</h1>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span class="badge">🔐 red-team · hardware</span>
+                <button class="theme-toggle" id="themeToggle">🌓 toggle</button>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="hero">
+            <div class="typed" id="typedText">Electrical Engineering · Red Team</div>
+            <div class="sub">
+                <span>📡 RF · SDR · Embedded</span>
+                <span>⚡ SCADA · Modbus · DNP3</span>
+                <span>🧪 OSCP · eJPT in progress</span>
+            </div>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">⛏ Projects</a>
+                <a href="#contact" class="btn">📬 Contact</a>
+                <a href="#" class="btn" id="resumeBtn">📄 Resume (PDF)</a>
+            </div>
+        </div>
+
+        <!-- PROJECTS -->
+        <h2 class="section-title" id="projects">⛏ Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Modbus Fuzzer</h3>
+                <span class="tag">Python · Scapy</span>
+                <p>Automated fuzzing for Modbus/TCP – discovered 3 crashers in legacy PLCs.</p>
+                <a href="#" class="repo-link">🔗 repo →</a>
+            </div>
+            <div class="project-card">
+                <h3>RFID Cloning Suite</h3>
+                <span class="tag">C · Proxmark</span>
+                <p>LF/HF sniffing, cloning, replay – portable toolkit.</p>
+                <a href="#" class="repo-link">🔗 repo →</a>
+            </div>
+            <div class="project-card">
+                <h3>Grid Simulator</h3>
+                <span class="tag">MATLAB · Simulink</span>
+                <p>Microgrid stability under MITM cyber‑attacks.</p>
+                <a href="#" class="repo-link">🔗 repo →</a>
+            </div>
+            <div class="project-card">
+                <h3>STM32 Keylogger</h3>
+                <span class="tag">Embedded C · BLE</span>
+                <p>PS/2 + USB inline keylogger with encrypted exfil.</p>
+                <a href="#" class="repo-link">🔗 repo →</a>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <h2 class="section-title" id="contact">📬 Contact</h2>
+        <div class="contact">
+            <pre style="color:#00ff41; font-size:0.8rem; margin-bottom:0.8rem;">
+    ╔═══════════════════════╗
+    ║  PGP: 0xDEADBEEF     ║
+    ║  Signal: butter.ee   ║
+    ╚═══════════════════════╝
+            </pre>
+            <div class="social">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">HTB</a>
+                <a href="mailto:you@example.com">✉ email</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            ⚡ 0x0B0F1A · built with pure entropy · <span id="year"></span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            "use strict";
+
+            // ---------- TYPED TEXT ----------
+            const phrases = [
+                "Electrical Engineering · Red Team",
+                "Hardware Hacker · RF Enthusiast",
+                "SCADA Security · Protocol Analysis",
+                "Embedded Exploitation"
+            ];
+            let idx = 0, charIdx = 0, isDeleting = false;
+            const el = document.getElementById('typedText');
+
+            function type() {
+                const cur = phrases[idx];
+                if (!isDeleting) {
+                    el.textContent = cur.slice(0, charIdx + 1);
+                    charIdx++;
+                    if (charIdx === cur.length) {
+                        isDeleting = true;
+                        setTimeout(type, 1800);
+                        return;
+                    }
+                    setTimeout(type, 60);
+                } else {
+                    el.textContent = cur.slice(0, charIdx - 1);
+                    charIdx--;
+                    if (charIdx === 0) {
+                        isDeleting = false;
+                        idx = (idx + 1) % phrases.length;
+                        setTimeout(type, 300);
+                        return;
+                    }
+                    setTimeout(type, 30);
+                }
+            }
+            type();
+
+            // ---------- YEAR ----------
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // ---------- THEME TOGGLE ----------
+            const toggle = document.getElementById('themeToggle');
+            toggle.addEventListener('click', () => {
+                document.body.classList.toggle('light');
+                toggle.textContent = document.body.classList.contains('light') ? '🌙 dark' : '🌓 toggle';
+            });
+
+            // ---------- RESUME PLACEHOLDER ----------
+            document.getElementById('resumeBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('🥔 Drop your resume as "resume.pdf" in the same folder and update the href.\nFor now, enjoy the pure HTML glory!');
+            });
+
+            // ---------- AUTO-INSERT YOUR GITHUB USERNAME ----------
+            // It reads the current URL and extracts the username from github.io
+            const host = window.location.hostname;
+            if (host.includes('github.io')) {
+                const user = host.split('.')[0];
+                const ribbons = document.querySelectorAll('.github-ribbon a');
+                ribbons.forEach(link => {
+                    link.href = `https://github.com/${user}`;
+                });
+                // also update any "repo" links if you want – but we keep placeholders.
+            }
+        })();
+    </script>
+</body>
+</html>
